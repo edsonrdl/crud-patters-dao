@@ -1,6 +1,4 @@
 package com.testeadmissao.testeadmissao.infrastructure.model;
-
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -20,11 +18,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ClientEntity {
+
     public static final String TABLE_NAME = "client";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code_cliente")
+    @Column(name = "code_client")
     private Long codeClient;
 
     @Column(name = "nome", length = 10, nullable = false, unique = false)

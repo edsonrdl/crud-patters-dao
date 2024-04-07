@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
 import com.testeadmissao.testeadmissao.controllers.ClientController;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
+import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl; // Importe a classe ClientDAOImpl aqui
 import com.testeadmissao.testeadmissao.infrastructure.mapper.ClientEntityMapper;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -28,6 +29,11 @@ public class DataSourceConfig {
     @Bean
     public CreateClientMapper createClientMapper() {
         return new CreateClientMapper();
+    }
+    
+    @Bean
+    public IGenericDAO<ClientEntity, Long> clientDAO() {
+        return new ClientDAOImpl(); // Crie uma instância de ClientDAOImpl aqui
     }
 
  

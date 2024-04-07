@@ -20,6 +20,7 @@ public class ClientController {
 
     private final CreateClientMapper _createClientMapper;
 
+
     public ClientController(IGenericDAO<ClientEntity, Long> clientDAO, CreateClientMapper createClientMapper) {
       _clientDAO = clientDAO;
       _createClientMapper = createClientMapper;
@@ -27,17 +28,14 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<CreateClientResponseDTO> createClient(@RequestBody CreateClientRequestDTO clientRequestDTO) {
-    // Mapeamento de CreateClientRequestDTO para ClientEntity
-    ClientEntity clientEntity = _createClientMapper.toEntity(clientRequestDTO);
+        ClientEntity clientEntity = _createClientMapper.toEntity(clientRequestDTO);
 
-    // Salvando o cliente no banco de dados
-    clientEntity = _clientDAO.save(clientEntity);
+        clientEntity = _clientDAO.save(clientEntity);
 
-    // Mapeamento de ClientEntity para CreateClientResponseDTO
-    CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
+        CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
 
-    return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
-}
+        return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
+    }
 
     // @GetMapping("/{id}")
     // public ResponseEntity<CreateClientResponseDTO> getClientById(@PathVariable Long id) {

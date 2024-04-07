@@ -2,6 +2,7 @@ package com.testeadmissao.testeadmissao.application.useCases.createClient;
 
 public class CreateClientResponseDTO {
     private String name;
+    private long codeClient;
     private String cpf;
     private int age;
 
@@ -12,6 +13,14 @@ public class CreateClientResponseDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public long getCodeClient() {
+        return codeClient;
+    }
+
+    public void setCodeClient(long codeClient) {
+        this.codeClient = codeClient;
     }
 
     public String getCpf() {

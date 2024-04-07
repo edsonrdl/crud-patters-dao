@@ -11,7 +11,7 @@ public class ClientEntityMapper {
 
     public static ClientEntity toClientEntity(ResultSet resultSet) throws SQLException {
         ClientEntity clientEntity = new ClientEntity();
-        clientEntity.setCodeClient(resultSet.getLong("code_cliente"));
+        clientEntity.setCodeClient(resultSet.getLong("code_client"));
         clientEntity.setName(resultSet.getString("nome"));
         clientEntity.setCpf(resultSet.getString("cpf"));
         clientEntity.setAge(resultSet.getInt("idade"));
