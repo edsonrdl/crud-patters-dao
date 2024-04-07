@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientRequestDTO;
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientResponseDTO;
+import com.testeadmissao.testeadmissao.domain.entities.Client;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -28,11 +29,11 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<CreateClientResponseDTO> createClient(@RequestBody CreateClientRequestDTO clientRequestDTO) {
-        ClientEntity clientEntity = _createClientMapper.toEntity(clientRequestDTO);
+          ClientEntity client = _createClientMapper.toEntity(clientRequestDTO);
 
-        clientEntity = _clientDAO.save(clientEntity);
-
-        CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
+          client = _clientDAO.save(client);
+          
+        CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(client);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }

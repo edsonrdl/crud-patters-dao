@@ -13,13 +13,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = ClientEntity.TABLE_NAME)
+@Table(name = "client")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class ClientEntity {
-
-    public static final String TABLE_NAME = "client";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

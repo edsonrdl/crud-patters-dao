@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.testeadmissao.testeadmissao.domain.entities.Client;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 

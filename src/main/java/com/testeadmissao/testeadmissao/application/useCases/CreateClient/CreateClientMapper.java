@@ -8,7 +8,6 @@ public class CreateClientMapper {
     public CreateClientResponseDTO toDTO(ClientEntity entity) {
         CreateClientResponseDTO dto = new CreateClientResponseDTO();
         dto.setName(entity.getName());
-            dto.setCodeClient(entity.getCodeClient()); 
         dto.setCpf(entity.getCpf()); 
         dto.setAge(entity.getAge()); 
         return dto;
