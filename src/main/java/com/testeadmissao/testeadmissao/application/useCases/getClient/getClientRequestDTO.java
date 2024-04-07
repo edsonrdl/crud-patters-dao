@@ -1,11 +1,11 @@
-package com.testeadmissao.testeadmissao.application.useCases.createClient;
+package com.testeadmissao.testeadmissao.application.useCases.getClient;
 
-public class CreateClientResponseDTO {
+public class getClientRequestDTO {
+
     private String name;
     private String cpf;
     private int age;
 
-    // Getters and setters
     public String getName() {
         return name;
     }

@@ -1,7 +1,6 @@
-package com.testeadmissao.testeadmissao.application.useCases.CreateClient;
+package com.testeadmissao.testeadmissao.application.useCases.createClient;
 
 public class CreateClientRequestDTO {
-
     private String name;
     private String cpf;
     private int age;
