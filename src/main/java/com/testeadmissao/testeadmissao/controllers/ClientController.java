@@ -11,6 +11,7 @@ import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateC
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientRequestDTO;
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientResponseDTO;
 import com.testeadmissao.testeadmissao.application.useCases.getClient.GetAllClientResponseDTO;
+import com.testeadmissao.testeadmissao.application.useCases.updateClient.UpdateClientRequestDTO;
 import com.testeadmissao.testeadmissao.domain.entities.Client;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
@@ -49,7 +50,6 @@ public class ClientController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        // Mapeamento de ClientEntity para CreateClientResponseDTO
         CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
@@ -74,28 +74,19 @@ public class ClientController {
         return ResponseEntity.ok(responseDTOs);
     }
     
-
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Void> updateClient(@PathVariable Long id, @RequestBody ClientRequestDTO clientRequestDTO) {
-    //     // Busca o cliente pelo ID
-    //     ClientEntity existingClientEntity = _clientDAO.findById(id);
-
-    //     // Se o cliente não for encontrado, retorna status 404 Not Found
-    //     if (existingClientEntity == null) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     // Atualiza os dados do cliente
-    //     existingClientEntity.setName(clientRequestDTO.getName());
-    //     existingClientEntity.setCpf(clientRequestDTO.getCpf());
-    //     existingClientEntity.setAge(clientRequestDTO.getAge());
-
-    //     // Atualiza o cliente no banco de dados
-    //     _clientDAO.update(existingClientEntity);
-
-    //     return new ResponseEntity<>(HttpStatus.OK);
-    // }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateClient(@PathVariable Long id, @RequestBody UpdateClientRequestDTO requestDTO) {
+        ClientEntity existingClientEntity = _clientDAO.findById(id);
+        if (existingClientEntity == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        existingClientEntity.setName(requestDTO.getName());
+        existingClientEntity.setCpf(requestDTO.getCpf());
+        existingClientEntity.setAge(requestDTO.getAge());
+        _clientDAO.update(existingClientEntity);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
     // @DeleteMapping("/{id}")
     // public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
     //     // Busca o cliente pelo ID

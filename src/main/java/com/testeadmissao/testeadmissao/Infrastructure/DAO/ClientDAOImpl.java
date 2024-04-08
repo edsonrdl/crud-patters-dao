@@ -93,21 +93,26 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
     }
     
     
-@Override
-public void update(ClientEntity entity) {
-    String sql = "UPDATE client SET nome=?, cpf=?, idade=? WHERE code_client=?";
-    try (Connection connection = getConnection();
-         PreparedStatement ps = connection.prepareStatement(sql)) {
-        ps.setString(1, entity.getName());
-        ps.setString(2, entity.getCpf());
-        ps.setInt(3, entity.getAge());
-        ps.setLong(4, entity.getCodeClient());
-        ps.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-        throw new RuntimeException("Error updating client entity", e);
+    @Override
+    public void update(ClientEntity entity) {
+        String sql = "UPDATE client SET nome=?, cpf=?, idade=? WHERE code_client=?";
+        try (Connection connection = getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, entity.getName());
+            ps.setString(2, entity.getCpf());
+            ps.setInt(3, entity.getAge());
+            ps.setLong(4, entity.getCodeClient());
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new RuntimeException("Updating client failed, no rows affected.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error updating client entity", e);
+        }
     }
-}
+    
+    
 
 @Override
 public void delete(Long id) {
