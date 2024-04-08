@@ -5,17 +5,14 @@ const themeToggler = document.querySelector(".theme-toggler");
 const tbodyAllclients = document.querySelector("#tbody-clients-all");
 const clientsAllbtn = document.querySelector("#btn-all-clients");
 const createBtn = document.querySelector("#btn-create-client");
-const containerCreateDeleteUpdateclientsCrud= document.querySelector(".container-create-delete-update-clients-crud");
+const containerCreateDeleteUpdateclientsCrud = document.querySelector(
+  ".container-create-delete-update-clients-crud"
+);
 const titleCreateDeleteUpdate = document.querySelector(
   ".title-create-delete-update-client"
 );
-const tbodyclientsRecentToday = document.querySelector(
-  "#tbody-clients-today"
-);
+const tbodyclientsRecentToday = document.querySelector("#tbody-clients-today");
 const url = "http://localhost:8080/client";
-let editBtn;
-let deleteBtn;
-
 
 const getAllclients = async () => {
   try {
@@ -36,24 +33,24 @@ const getAllclients = async () => {
 async function getClient(id) {
   try {
     const response = await fetch(`${url}/${id}`, {
-      method: 'GET'
+      method: "GET",
     });
     if (!response.ok) {
-      throw new Error('Erro ao buscar Clientes');
+      throw new Error("Erro ao buscar Clientes");
     }
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Erro:', error);
+    console.error("Erro:", error);
     throw error;
   }
-};
+}
 
 const allclients = async () => {
   const allclients = await getAllclients();
 
   tbodyAllclients.innerHTML = "";
-  if (allclients!= null) {
+  if (allclients != null) {
     for (i = 0; i < allclients.length; i++) {
       const client = allclients[i];
       const tr = document.createElement("tr");
@@ -62,13 +59,9 @@ const allclients = async () => {
      <td>${client.name}</td>
      <td>${client.cpf}</td>
      <td>${client.age}</td>
-     <td><span id="${
-      client.id
-        }" class="material-symbols-outlined btn-edit-client">
+     <td><span id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">
         edit</span></td>
-        <td><span id="${
-          client.id
-        }" class="material-symbols-outlined btn-delete-client">
+        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">
         delete</span></td>
         `;
       tr.innerHTML = trContent;
@@ -76,7 +69,7 @@ const allclients = async () => {
     }
     editBtn = document.querySelector(".btn-edit-client");
     deleteBtn = document.querySelector(".btn-delete-client");
-    editBtn.addEventListener("click", edit);
+    editBtn.addEventListener("click", editClient);
     deleteBtn.addEventListener("click", deleteClient);
   }
 };
@@ -96,12 +89,8 @@ const searchNumber = async () => {
         <td>${client.name}</td>
         <td>${client.cpf}</td>
         <td>${client.age}</td>
-        <td><span id="${
-          client.id
-        }" class="material-symbols-outlined btn-edit-client">edit</span></td>
-        <td><span id="${
-          client.id
-        }" class="material-symbols-outlined btn-delete-client">delete</span></td>
+        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">edit</span></td>
+        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">delete</span></td>
       `;
       tr.innerHTML = trContent;
       tbodyAllclients.appendChild(tr);
@@ -109,117 +98,48 @@ const searchNumber = async () => {
     editBtn = document.querySelector(".btn-edit-client");
     deleteBtn = document.querySelector(".btn-delete-client");
     editBtn.addEventListener("click", editClient);
-    
+    deleteBtn.addEventListener("click", deleteClient);
   } catch (error) {
     console.error("Erro ao buscar produto:", error);
   }
 };
 
 const createClient = function () {
-  console.log("Olá")
-
   containerCreateDeleteUpdateclientsCrud.innerHTML = "";
-  
+
   titleCreateDeleteUpdate.innerHTML = "Criar  Produto";
 
-      const containerCreateForm = `<div class="create-update-delete-form-client">
+  const containerCreateForm = `<div class="create-update-delete-form-client">
       <form action="">
           <div class="form-group-text">
               <label for="nome">Nome</label>
-              <input type="text" id="nome" placeholder="Nome produto">
+              <input type="text" id="nome" placeholder="Nome Cliente" required>
               <label for="cpf">CPF</label>
-              <input type="text" id="cpf" placeholder="Descreva o produto">
+              <input type="text" id="cpf" placeholder="CPF do cliente" required>
           </div>
           <div class="form-group-number">
               <div class="form-content-number">
                   <label for="age">Idade</label>
-                  <input type="number" id="age" min="0" step="1" required>
+                  <input type="number" id="age" min="0" step="0" required>
               </div>
           </div>
-          <button  id="btn-create-clientconfirm" class="btn-add-confirm-or-delete" type="button">Confirmar</button>
+          <button  id="btn-create-client-confirm" class="btn-add-confirm-or-delete" type="button">Confirmar</button>
       </form>
   </div>
   `;
-        containerCreateDeleteUpdateclientsCrud.innerHTML = containerCreateForm;
-        const btnCreateConfirm = document.querySelector("#btn-create-clientconfirm");
-        btnCreateConfirm.addEventListener("click", confirmFormCreater);
-        
+  containerCreateDeleteUpdateclientsCrud.innerHTML = containerCreateForm;
+  const btnCreateConfirm = document.querySelector("#btn-create-client-confirm");
+  btnCreateConfirm.addEventListener("click", confirmFormCreater);
 };
 
 createBtn.addEventListener("click", createClient);
 
 const confirmFormCreater = async (event) => {
-  event.preventDefault(); 
-  
-  const name = document.getElementById('nome').value;
-  const cpf = document.getElementById('cpf').value;
-  const age = parseFloat(document.getElementById('age').value);
+  event.preventDefault();
 
-  const data = {
-    name,
-    cpf,
-    age
-  };
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
-    if (!response.ok) {
-      throw new Error('Erro ao enviar dados para a API');
-    }
-    const responseData = await response.json();
-    console.log('Resposta da API:', responseData);
-  } catch (error) {
-    console.error('Erro ao enviar dados para a API:', error);
-  }
-};
-const editClient = async function () {
-  const btnEditIdAll = document.querySelectorAll(".btn-edit-client");
-  btnEditIdAll.forEach(btnEditI => {
-    btnEditI.addEventListener("click", async function(event) {
-      const id = event.target.closest('.btn-edit-client').id;
-      const client = await getClient(id);
-      containerCreateDeleteUpdateclientsCrud.innerHTML = "";
-      titleCreateDeleteUpdate.innerHTML = "Editar  Produto";
-    
-          const containerEdit = `<div class="create-update-delete-form-client">
-          <div class="container-edit">
-              <div class="edit-group-text">
-                  <h3>Nome</h3>
-                  <input type="text" id="name-edit" class="${client.codeClient}" value="${client.name}">
-                  <h3>Descrição</h3>
-                  <input type="text" id="cpf-edit" value="${client.cpf}">
-              </div>
-              <div class="edit-group-number">
-                  <div class="edit-content-number">
-                      <h3>Valor</h3>
-                      <input type="number" id="age-edit" value="${client.age}">
-                  </div>
-              </div>
-              <button id="btn-edit-clientconfirm" class="btn-add-confirm-or-delete" type="button">Confirmar</button>
-          </div>
-      </div>
-      `;
-            containerCreateDeleteUpdateclientsCrud.innerHTML = containerEdit;
-            const btnEditConfirm = document.querySelector("#btn-edit-clientconfirm");
-            btnEditConfirm.addEventListener("click", confirmFormEdit);
-    });
-  });
-      
-};
-
-const confirmFormEdit = async (event) => {
-
-  const ValidationId=document.getElementById('name-edit');
-  const id=ValidationId.id;
-  event.preventDefault(); 
-  const name = document.getElementById('name-edit').value;
-  const cpf = document.getElementById('cpf-edit').value;
-  const age = parseInt(document.getElementById('age-edit').value);
+  const name = document.getElementById("nome").value;
+  const cpf = document.getElementById("cpf").value;
+  const age = parseFloat(document.getElementById("age").value);
 
   const data = {
     name,
@@ -227,33 +147,116 @@ const confirmFormEdit = async (event) => {
     age,
   };
   try {
-    const response = await fetch(url+"/"+id, {
-      method: 'PUT',
+    const response = await fetch(url, {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     if (!response.ok) {
-      throw new Error('Erro ao enviar dados para a API');
+      throw new Error("Erro ao enviar dados para a API");
     }
     const responseData = await response.json();
-    console.log('Resposta da API:', responseData);
-    containerCreateDeleteUpdateclientsCrud.innerHTML = "";
+    allclients();
+    cleanInputCreate()
+    console.log("Resposta da API:", responseData);
+
+
   } catch (error) {
-    console.error('Erro ao enviar dados para a API:', error);
+    console.error("Erro ao enviar dados para a API:", error);
   }
 };
-const deleteClient = async function () {
-  const btnDeleteIdAll = document.querySelectorAll(".btn-delete-client");
-  btnDeleteIdAll.forEach(btnDeleteId => {
-    btnDeleteId.addEventListener("click", async function(event) {
-      const id = event.target.closest('.btn-delete-client').id;
+  function cleanInputCreate(){
+  const name = document.getElementById("nome");
+  name.value="";
+  const cpf = document.getElementById("cpf");
+  cpf.value="";
+  const age = parseFloat(document.getElementById("age"));
+  age.value=0;
+}
+const editClient = async function () {
+  const btnEditIdAll = document.querySelectorAll(".btn-edit-client");
+  btnEditIdAll.forEach((btnEditI) => {
+    btnEditI.addEventListener("click", async function (event) {
+      const id = event.target.closest(".btn-edit-client").id;
       const client = await getClient(id);
       containerCreateDeleteUpdateclientsCrud.innerHTML = "";
-      titleCreateDeleteUpdate.innerHTML = "Deletar o Produto?";
+      titleCreateDeleteUpdate.innerHTML = "Editar Cliente";
+
+      const containerEdit = `<div class="create-update-delete-form-client">
+          <div class="container-edit">
+              <div class="edit-group-text">
+                  <h3>Nome</h3>
+                  <input type="text" id="${client.codeClient}" class="name-edit" value="${client.name}">
+                  <h3>CPF </h3>
+                  <input type="text" id="cpf-edit" value="${client.cpf}">
+              </div>
+              <div class="edit-group-number">
+                  <div class="edit-content-number">
+                      <h3>Idade</h3>
+                      <input type="number" id="age-edit" value="${client.age}">
+                  </div>
+              </div>
+              <button id="btn-edit-client-confirm" class="btn-add-confirm-or-delete" type="button">Editar</button>
+          </div>
+      </div>
+      `;
+      containerCreateDeleteUpdateclientsCrud.innerHTML = containerEdit;
+      const btnEditConfirm = document.querySelector("#btn-edit-client-confirm");
+      btnEditConfirm.addEventListener("click", confirmFormEdit);
+    });
+  });
+};
+
+const confirmFormEdit = async (event) => {
+  event.preventDefault();
+  const id = document.querySelector(".name-edit").id;
+  const name = document.querySelector(".name-edit").value;
+  const cpf = document.getElementById("cpf-edit").value;
+  const age = parseInt(document.getElementById("age-edit").value);
+
+  const data = {
+    name,
+    cpf,
+    age,
+  };
+  try {
+    const response = await fetch(url + "/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+
+    });
     
-          const containerDelete = `
+    if (!response.ok) {
+      const errorMessage = await response.text(); 
+     
+      throw new Error(`Erro ao Enviar para API: ${errorMessage}`);
+    }
+    
+    const responseData = await response.json();
+    console.log("Respota da API:", responseData);
+    titleCreateDeleteUpdate.innerHTML = "";
+    containerCreateDeleteUpdateclientsCrud.innerHTML = "";
+    allclients();
+  } catch (error) {
+    console.error("Error al enviar datos a la API:", error);
+  }
+};
+
+const deleteClient = async function () {
+  const btnDeleteIdAll = document.querySelectorAll(".btn-delete-client");
+  btnDeleteIdAll.forEach((btnDeleteId) => {
+    btnDeleteId.addEventListener("click", async function (event) {
+      const id = event.target.closest(".btn-delete-client").id;
+      const client = await getClient(id);
+      containerCreateDeleteUpdateclientsCrud.innerHTML = "";
+      titleCreateDeleteUpdate.innerHTML = "Deletar o Cliente?";
+
+      const containerDelete = `
           <div class="create-update-delete-form-client">
           <div class="container-delete">
               <div class="edit-group-text">
@@ -271,37 +274,40 @@ const deleteClient = async function () {
                   </div>
               </div>
               <div class="delete-content-select">
-              <h3>Fornecedor</h3>
-              <button id="btn-delete-clientconfirm" class="btn-add-confirm-or-delete"
-                  type="button">Confirmar</button>
+              <button id="btn-delete-client-confirm" class="btn-add-confirm-or-delete"
+                  type="button">Deletar</button>
           </div>
       </div>
           `;
-            containerCreateDeleteUpdateclientsCrud.innerHTML = containerDelete;
-            const btnDeleteConfirm = document.querySelector("#btn-delete-clientconfirm");
-            btnDeleteConfirm.addEventListener("click", confirmDelete);
+      containerCreateDeleteUpdateclientsCrud.innerHTML = containerDelete;
+      const btnDeleteConfirm = document.querySelector(
+        "#btn-delete-client-confirm"
+      );
+      btnDeleteConfirm.addEventListener("click", confirmDelete);
     });
   });
-      
 };
 
 const confirmDelete = async (event) => {
-  event.preventDefault(); 
-  const idDelete = document.querySelector('.name-delete');
+  event.preventDefault();
+  const idDelete = document.querySelector(".id-delete");
+  console.log(idDelete.id);
   try {
-    const response = await fetch(url+"/"+idDelete.id, {
-      method: 'DELETE',
+    const response = await fetch(url + "/" + idDelete.id, {
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     });
     if (!response.ok) {
-      throw new Error('Erro ao Deletar dados da API');
+      throw new Error("Erro ao Deletar dados da API");
     }
-    const responseData = await response.json();
-    console.log('Resposta da API:', responseData);
+    titleCreateDeleteUpdate.innerHTML = "";
     containerCreateDeleteUpdateclientsCrud.innerHTML = "";
+    allclients();
+    const responseData = await response.json();
+    console.log("Resposta da API:", responseData);
   } catch (error) {
-    console.error('Erro ao Deletar dados da API:', error);
+    console.error("Erro ao Deletar dados da API:", error);
   }
 };

@@ -75,7 +75,7 @@ public class ClientController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateClient(@PathVariable Long id, @RequestBody ClientRequestDTO requestDTO) {
+    public ResponseEntity<ClientResponseDTO> updateClient(@PathVariable Long id, @RequestBody ClientRequestDTO requestDTO) {
         ClientEntity existingClientEntity = _clientDAO.findById(id);
         if (existingClientEntity == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -84,7 +84,8 @@ public class ClientController {
         existingClientEntity.setCpf(requestDTO.getCpf());
         existingClientEntity.setAge(requestDTO.getAge());
         _clientDAO.update(existingClientEntity);
-        return new ResponseEntity<>(HttpStatus.OK);
+        ClientResponseDTO responseDTO = _createClientMapper.toDTO(existingClientEntity); 
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")

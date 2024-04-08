@@ -259,8 +259,9 @@ input::-webkit-outer-spin-button {
     color: var(--color-red);
     opacity: 50%;
 }
-.btn-remove-:hover,.btn-add-:hover,.btn-add-:hover,.btn-delete-client{
+.btn-edit-client:hover,.btn-delete-client:hover{
     opacity: 100%;
+    scale: 1.2;
 }
  .clients-supplier {
     width: 80%;
@@ -369,13 +370,13 @@ width: 100%;
     flex-direction: column;
 }
 .container-create-delete-update-clients-crud label{
-    font-size: var(--font-size-3);
+    font-size: 1.3rem;
     font-weight: 600;
     color: var(--color-onys);
 }
 .container-create-delete-update-clients-crud   input[type="text"]{
-    width: 100%;
-    height: 20px;
+    width: 80%;
+    height: 40px;
     text-align: center;
     background: transparent;
     border: solid 1px #3d3d3d;
@@ -391,8 +392,8 @@ width: 100%;
  opacity: 60%;
 }
 .container-create-delete-update-clients-crud  input[type="number"]{
-    width: 70px;
-    height: 20px;
+    width: 100px;
+    height: 40px;
     text-align: center;
     border: solid 1px #3d3d3d;
     color: var(--color-back);
@@ -465,7 +466,7 @@ width: 100%;
 
 .create-update-delete-form-client h3{
     text-align: start;
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-3);
     font-weight: 600;
     color: var(--color-onys);
 }
