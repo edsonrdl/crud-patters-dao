@@ -42,6 +42,7 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
         }
         return cliente;
     }
+    
 
     @Override
     public List<ClientEntity> findAll() {
@@ -51,11 +52,12 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
              PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                ClientEntity cliente = new ClientEntity();
-                cliente.setCodeClient(rs.getLong("code_client"));
-                cliente.setName(rs.getString("nome"));
-                cliente.setCpf(rs.getString("cpf"));
-                cliente.setAge(rs.getInt("idade"));
+                ClientEntity cliente = new ClientEntity(
+                    rs.getLong("code_client"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getInt("idade")
+                );
                 clientes.add(cliente);
             }
         } catch (SQLException e) {

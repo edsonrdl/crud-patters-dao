@@ -1,6 +1,6 @@
 package com.testeadmissao.testeadmissao.application.useCases.getAllClient;
 
-public class getAllClientRequestDTO {
+public class GetAllClientRequestDTO {
 
     private String name;
     private String cpf;

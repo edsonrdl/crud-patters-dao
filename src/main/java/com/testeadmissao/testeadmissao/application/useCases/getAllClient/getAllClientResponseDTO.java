@@ -1,7 +1,7 @@
 
 package com.testeadmissao.testeadmissao.application.useCases.getAllClient;
 
-public class getAllClientResponseDTO {
+public class GetAllClientResponseDTO {
     private Long id;
     private String name;
     private int price; 

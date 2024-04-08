@@ -1,10 +1,12 @@
-
 package com.testeadmissao.testeadmissao.application.useCases.getClient;
 
-public class getClientResponseDTO {
+
+public class GetAllClientResponseDTO {
     private Long id;
     private String name;
-    private int price; 
+    private int price;
+
+
     public Long getId() {
         return id;
     }
@@ -28,4 +30,4 @@ public class getClientResponseDTO {
     public void setPrice(int price) {
         this.price = price;
     }
-}
+    }
