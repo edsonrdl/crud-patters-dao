@@ -2,9 +2,6 @@ package com.testeadmissao.testeadmissao.configuration;
 
 import javax.sql.DataSource;
 
-import org.springframework.boot.autoconfigure.pulsar.PulsarProperties.Client;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
@@ -14,6 +11,9 @@ import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl; // Impo
 import com.testeadmissao.testeadmissao.infrastructure.mapper.ClientEntityMapper;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 @Configuration
 public class DataSourceConfig {
     
@@ -21,7 +21,7 @@ public class DataSourceConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:~/test");
+        dataSource.setUrl("jdbc:h2:mem:testdb"); 
         dataSource.setUsername("SA");
         dataSource.setPassword("senha");
         return dataSource;
@@ -34,7 +34,7 @@ public class DataSourceConfig {
     
     @Bean
     public IGenericDAO<ClientEntity, Long> clientDAO() {
-        return new ClientDAOImpl(); // Crie uma instância de ClientDAOImpl aqui
+        return new ClientDAOImpl();
     }
 
  

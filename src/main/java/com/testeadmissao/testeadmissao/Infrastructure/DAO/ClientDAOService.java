@@ -6,16 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
-
 
 @Service
 public class ClientDAOService implements IGenericDAO<ClientEntity, Long> {
 
-    @Autowired
     private final IGenericDAO<ClientEntity, Long> clientDAO;
 
+    @Autowired
     public ClientDAOService(IGenericDAO<ClientEntity, Long> clientDAO) {
         this.clientDAO = clientDAO;
     }

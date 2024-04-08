@@ -24,8 +24,8 @@ public class ClientEntity {
     @Column(name = "code_client")
     private Long codeClient;
 
-    @Column(name = "nome", length = 10, nullable = false, unique = false)
-    @Size(min = 3, max = 15, message = "O Nome deve ter entre 3 e 10 caracteres")
+    @Column(name = "nome", length = 25, nullable = false, unique = false)
+    @Size(min = 3, max = 25, message = "O Nome deve ter entre 3 e 10 caracteres")
     @NotBlank(message = "O Nome é obrigatório")
     private String name;
 

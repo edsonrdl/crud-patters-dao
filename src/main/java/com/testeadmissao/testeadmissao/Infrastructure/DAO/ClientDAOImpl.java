@@ -32,9 +32,9 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
                 if (rs.next()) {
                     cliente = new ClientEntity();
                     cliente.setCodeClient(rs.getLong("code_client"));
-                    cliente.setName(rs.getString("name"));
+                    cliente.setName(rs.getString("nome"));
                     cliente.setCpf(rs.getString("cpf"));
-                    cliente.setAge(rs.getInt("age"));
+                    cliente.setAge(rs.getInt("idade"));
                 }
             }
         } catch (SQLException e) {
@@ -53,9 +53,9 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
             while (rs.next()) {
                 ClientEntity cliente = new ClientEntity();
                 cliente.setCodeClient(rs.getLong("code_client"));
-                cliente.setName(rs.getString("name"));
+                cliente.setName(rs.getString("nome"));
                 cliente.setCpf(rs.getString("cpf"));
-                cliente.setAge(rs.getInt("age"));
+                cliente.setAge(rs.getInt("idade"));
                 clientes.add(cliente);
             }
         } catch (SQLException e) {
@@ -66,48 +66,57 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
 
     @Override
     public ClientEntity save(ClientEntity entity) {
-        String sql = "INSERT INTO client (name, cpf, age) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO client (nome, cpf, idade) VALUES (?, ?, ?)";
         try (Connection connection = getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getCpf());
             ps.setInt(3, entity.getAge());
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Creating client failed, no rows affected.");
+            }
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     entity.setCodeClient(generatedKeys.getLong(1));
+                } else {
+                    throw new SQLException("Creating client failed, no ID obtained.");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("Error saving client entity", e);
         }
         return entity;
     }
-
-    @Override
-    public void update(ClientEntity entity) {
-        String sql = "UPDATE client SET name=?, cpf=?, age=? WHERE code_client=?";
-        try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, entity.getName());
-            ps.setString(2, entity.getCpf());
-            ps.setInt(3, entity.getAge());
-            ps.setLong(4, entity.getCodeClient());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    
+    
+@Override
+public void update(ClientEntity entity) {
+    String sql = "UPDATE client SET nome=?, cpf=?, idade=? WHERE code_client=?";
+    try (Connection connection = getConnection();
+         PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setString(1, entity.getName());
+        ps.setString(2, entity.getCpf());
+        ps.setInt(3, entity.getAge());
+        ps.setLong(4, entity.getCodeClient());
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Error updating client entity", e);
     }
+}
 
-    @Override
-    public void delete(Long id) {
-        String sql = "DELETE FROM client WHERE code_client=?";
-        try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setLong(1, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+@Override
+public void delete(Long id) {
+    String sql = "DELETE FROM client WHERE code_client=?";
+    try (Connection connection = getConnection();
+         PreparedStatement ps = connection.prepareStatement(sql)) {
+        ps.setLong(1, id);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Error deleting client entity", e);
     }
+}
 }
