@@ -4,10 +4,10 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientMapper;
+import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
 import com.testeadmissao.testeadmissao.controllers.ClientController;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl; // Importe a classe ClientDAOImpl aqui
+import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAO; // Importe a classe ClientDAOImpl aqui
 import com.testeadmissao.testeadmissao.infrastructure.mapper.ClientEntityMapper;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -34,7 +34,7 @@ public class DataSourceConfig {
     
     @Bean
     public IGenericDAO<ClientEntity, Long> clientDAO() {
-        return new ClientDAOImpl();
+        return new ClientDAO();
     }
 
  

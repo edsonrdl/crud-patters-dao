@@ -3,14 +3,16 @@ package com.testeadmissao.testeadmissao.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientMapper;
-import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientRequestDTO;
-import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientResponseDTO;
-import com.testeadmissao.testeadmissao.Application.useCases.getClient.GetAllClientResponseDTO;
-import com.testeadmissao.testeadmissao.Application.useCases.updateClient.UpdateClientRequestDTO;
+
+import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
+import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientRequestDTO;
+import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientResponseDTO;
+import com.testeadmissao.testeadmissao.application.useCases.getClient.GetAllClientResponseDTO;
+import com.testeadmissao.testeadmissao.application.useCases.updateClient.UpdateClientRequestDTO;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -19,9 +21,10 @@ import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 @RequestMapping("/client")
 public class ClientController {
   
-
+    @Autowired
     private final IGenericDAO<ClientEntity, Long> _clientDAO;
 
+    @Autowired
     private final CreateClientMapper _createClientMapper;
 
     public ClientController(IGenericDAO<ClientEntity, Long> clientDAO, CreateClientMapper createClientMapper) {
