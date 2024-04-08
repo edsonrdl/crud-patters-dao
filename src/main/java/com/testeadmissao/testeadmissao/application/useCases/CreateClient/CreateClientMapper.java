@@ -7,6 +7,7 @@ import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 public class CreateClientMapper {
     public CreateClientResponseDTO toDTO(ClientEntity entity) {
         CreateClientResponseDTO dto = new CreateClientResponseDTO();
+        dto.setCodeClient(entity.getCodeClient());
         dto.setName(entity.getName());
         dto.setCpf(entity.getCpf()); 
         dto.setAge(entity.getAge()); 
