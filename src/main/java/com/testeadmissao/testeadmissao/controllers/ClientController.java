@@ -8,11 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientRequestDTO;
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.useCases.getClient.GetAllClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.useCases.updateClient.UpdateClientRequestDTO;
+import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientMapper;
+import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientRequestDTO;
+import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientResponseDTO;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -25,50 +23,51 @@ public class ClientController {
     private final IGenericDAO<ClientEntity, Long> _clientDAO;
 
     @Autowired
-    private final CreateClientMapper _createClientMapper;
+    private final ClientMapper _createClientMapper;
 
-    public ClientController(IGenericDAO<ClientEntity, Long> clientDAO, CreateClientMapper createClientMapper) {
+    public ClientController(IGenericDAO<ClientEntity, Long> clientDAO, ClientMapper createClientMapper) {
       _clientDAO = clientDAO;
       _createClientMapper = createClientMapper;
     }
 
     @PostMapping
-    public ResponseEntity<CreateClientResponseDTO> createClient(@RequestBody CreateClientRequestDTO clientRequestDTO) {
+    public ResponseEntity<ClientResponseDTO> createClient(@RequestBody ClientRequestDTO clientRequestDTO) {
           ClientEntity client = _createClientMapper.toEntity(clientRequestDTO);
 
           client = _clientDAO.save(client);
           
-        CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(client);
+        ClientResponseDTO responseDTO = _createClientMapper.toDTO(client);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreateClientResponseDTO> getClientById(@PathVariable Long id) {
+    public ResponseEntity<ClientResponseDTO> getClientById(@PathVariable Long id) {
         ClientEntity clientEntity = _clientDAO.findById(id);
 
         if (clientEntity == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        CreateClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
+        ClientResponseDTO responseDTO = _createClientMapper.toDTO(clientEntity);
 
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
   
     @GetMapping("/clients")
-    public ResponseEntity<List<GetAllClientResponseDTO>> getAllClients() {
+    public ResponseEntity<List<ClientResponseDTO>> getAllClients() {
         List<ClientEntity> clients = _clientDAO.findAll();
         if (clients.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        List<GetAllClientResponseDTO> responseDTOs = clients.stream()
+        List<ClientResponseDTO> responseDTOs = clients.stream()
                 .map(client -> {
-                    GetAllClientResponseDTO responseDTO = new GetAllClientResponseDTO();
-                    responseDTO.setId(client.getCodeClient());
+                    ClientResponseDTO responseDTO = new ClientResponseDTO();
+                    responseDTO.setCodeClient(client.getCodeClient());
                     responseDTO.setName(client.getName());
-                    responseDTO.setPrice(client.getAge());
+                    responseDTO.setCpf(client.getCpf());
+                    responseDTO.setAge(client.getAge());
                     return responseDTO;
                 })
                 .collect(Collectors.toList());
@@ -76,7 +75,7 @@ public class ClientController {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateClient(@PathVariable Long id, @RequestBody UpdateClientRequestDTO requestDTO) {
+    public ResponseEntity<Void> updateClient(@PathVariable Long id, @RequestBody ClientRequestDTO requestDTO) {
         ClientEntity existingClientEntity = _clientDAO.findById(id);
         if (existingClientEntity == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

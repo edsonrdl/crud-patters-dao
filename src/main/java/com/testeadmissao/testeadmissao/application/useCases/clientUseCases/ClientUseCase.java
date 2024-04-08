@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.infrastructure.dao;
+package com.testeadmissao.testeadmissao.application.useCases.clientUseCases;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
@@ -6,11 +6,11 @@ import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
 
 @Service
-public class ClientDAOService implements IGenericDAO<ClientEntity, Long> {
+public class ClientUseCase implements IGenericDAO<ClientEntity, Long> {
 
     private final IGenericDAO<ClientEntity, Long> clientDAO;
    
-    public ClientDAOService(IGenericDAO<ClientEntity, Long> clientDAO) {
+    public ClientUseCase(IGenericDAO<ClientEntity, Long> clientDAO) {
         this.clientDAO = clientDAO;
     }
 

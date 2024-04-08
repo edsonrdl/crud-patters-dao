@@ -1,7 +1,6 @@
-package com.testeadmissao.testeadmissao.application.useCases.getAllClient;
+package com.testeadmissao.testeadmissao.application.useCases.clientUseCases;
 
-public class GetAllClientRequestDTO {
-
+public class ClientRequestDTO {
     private String name;
     private String cpf;
     private int age;
