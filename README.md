@@ -28,10 +28,10 @@ b. Nome
 c. CPF
 d. Idade
 ## Tecnologias
-● Utilize a linguagem JAVA como back-end
-● O Front-End deverá ser da sua escolha
-● O banco de dados também é da sua preferência, mas indicamos o H2 ou o Firebird
-● Utilize os padrões DAO e DTO
+● Utilizado a linguagem JAVA como back-end
+● O Front-End Htl,css Javascript
+● O banco de e eória H2 
+● Utilizado o padrões DAO e DTO
 
 
 ## Preview
