@@ -5,8 +5,7 @@ public class ClientResponseDTO {
     private long codeClient;
     private String cpf;
     private int age;
-
-    // Getters and setters
+    
     public String getName() {
         return name;
     }
