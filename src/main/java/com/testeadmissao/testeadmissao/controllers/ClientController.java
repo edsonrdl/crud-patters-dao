@@ -6,13 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientRequestDTO;
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.useCases.getClient.GetAllClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.useCases.updateClient.UpdateClientRequestDTO;
-import com.testeadmissao.testeadmissao.domain.entities.Client;
+import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientMapper;
+import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientRequestDTO;
+import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientResponseDTO;
+import com.testeadmissao.testeadmissao.Application.useCases.getClient.GetAllClientResponseDTO;
+import com.testeadmissao.testeadmissao.Application.useCases.updateClient.UpdateClientRequestDTO;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 
@@ -87,19 +85,15 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
     
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
-    //     // Busca o cliente pelo ID
-    //     ClientEntity clientEntity = _clientDAO.findById(id);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
+        ClientEntity clientEntity = _clientDAO.findById(id);
+        if (clientEntity == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        _clientDAO.delete(id);
 
-    //     // Se o cliente não for encontrado, retorna status 404 Not Found
-    //     if (clientEntity == null) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     // Deleta o cliente do banco de dados
-    //     clientDAO.delete(id);
-
-    //     return new ResponseEntity<>(HttpStatus.OK);
-    // }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
 }

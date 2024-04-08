@@ -11,9 +11,9 @@ import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 @Service
 public class ClientDAOService implements IGenericDAO<ClientEntity, Long> {
 
+    @Autowired
     private final IGenericDAO<ClientEntity, Long> clientDAO;
 
-    @Autowired
     public ClientDAOService(IGenericDAO<ClientEntity, Long> clientDAO) {
         this.clientDAO = clientDAO;
     }

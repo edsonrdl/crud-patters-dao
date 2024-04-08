@@ -4,7 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.testeadmissao.testeadmissao.application.useCases.createClient.CreateClientMapper;
+import com.testeadmissao.testeadmissao.Application.useCases.createClient.CreateClientMapper;
 import com.testeadmissao.testeadmissao.controllers.ClientController;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl; // Importe a classe ClientDAOImpl aqui
