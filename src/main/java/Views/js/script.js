@@ -59,9 +59,9 @@ const allclients = async () => {
      <td>${client.name}</td>
      <td>${client.cpf}</td>
      <td>${client.age}</td>
-     <td><span id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">
+     <td><span onclick="editClient(event)" id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">
         edit</span></td>
-        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">
+        <td><span onclick="deleteClient(event)" id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">
         delete</span></td>
         `;
       tr.innerHTML = trContent;
@@ -89,16 +89,17 @@ const searchNumber = async () => {
         <td>${client.name}</td>
         <td>${client.cpf}</td>
         <td>${client.age}</td>
-        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">edit</span></td>
-        <td><span id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">delete</span></td>
+        <td><span onclick="editClient(event)" id="${client.codeClient}" class="material-symbols-outlined btn-edit-client">
+        edit</span></td>
+        <td><span onclick="deleteClient(event)" id="${client.codeClient}" class="material-symbols-outlined btn-delete-client">
+        delete</span></td>
       `;
       tr.innerHTML = trContent;
       tbodyAllclients.appendChild(tr);
     }
     editBtn = document.querySelector(".btn-edit-client");
     deleteBtn = document.querySelector(".btn-delete-client");
-    editBtn.addEventListener("click", editClient);
-    deleteBtn.addEventListener("click", deleteClient);
+    btnDeleteConfirm.addEventListener("click", confirmDelete);
   } catch (error) {
     console.error("Erro ao buscar produto:", error);
   }
@@ -175,7 +176,7 @@ const confirmFormCreater = async (event) => {
   const age = parseFloat(document.getElementById("age"));
   age.value=0;
 }
-const editClient = async function () {
+const editClient = async function (event) {
   const btnEditIdAll = document.querySelectorAll(".btn-edit-client");
   btnEditIdAll.forEach((btnEditI) => {
     btnEditI.addEventListener("click", async function (event) {

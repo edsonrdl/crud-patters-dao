@@ -343,7 +343,7 @@ width: 100%;
 .create-update-delete-form-client{
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding: 50px;
 }
 .create-delete-update-client .container-create-delete-update-clients-crud form{
     height: 100%;
@@ -418,7 +418,7 @@ width: 100%;
     padding: 5px 15px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 2rem;
     border: none;
     margin: 5px;
     background: var(--color-lavender-floral);
@@ -451,6 +451,7 @@ width: 100%;
   }
   .edit-group-number,.delete-group-number{
     width: 100%;
+    
     gap: 5px;
     display: flex;
     align-items: start;
@@ -460,6 +461,7 @@ width: 100%;
   .edit-content-number,.delete-content-number{
     display: flex;
     align-items: center;
+    height: 40px;
     flex-direction: row;
     gap: 20px;
   }
@@ -475,9 +477,9 @@ width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 70px;
-    width: 100%;
-    height: 20px;
+    min-width: 100px;
+    width: 80%;
+    height: 40px;
     text-align: center;
     background: transparent;
     border: solid 1px #3d3d3d;
