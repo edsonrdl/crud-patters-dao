@@ -14,6 +14,7 @@ import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class DataSourceConfig {
     
