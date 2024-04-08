@@ -43,4 +43,5 @@ public class DataSourceConfig {
     public ClientController clientController(IGenericDAO<ClientEntity, Long> clientDAO, ClientMapper createClientMapper) {
         return new ClientController(clientDAO, createClientMapper);
     }
+    
 }

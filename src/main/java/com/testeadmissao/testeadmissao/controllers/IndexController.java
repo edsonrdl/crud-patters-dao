@@ -4,7 +4,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Order
 @Controller
 public class IndexController {
 
