@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.application.useCases.clientUseCases;
+package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
 
 
 import com.testeadmissao.testeadmissao.domain.entities.Client;

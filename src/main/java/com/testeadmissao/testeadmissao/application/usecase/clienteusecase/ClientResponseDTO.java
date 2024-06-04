@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.application.useCases.clientUseCases;
+package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
 
 public class ClientResponseDTO {
     private String name;

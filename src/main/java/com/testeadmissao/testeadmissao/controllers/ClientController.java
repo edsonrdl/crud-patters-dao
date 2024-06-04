@@ -8,10 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientMapper;
-import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientRequestDTO;
-import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.ClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.useCases.clientUseCases.IClientUseCase;
+import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientMapper;
+import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientRequestDTO;
+import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientResponseDTO;
+import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.IClientUseCase;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
 import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
 

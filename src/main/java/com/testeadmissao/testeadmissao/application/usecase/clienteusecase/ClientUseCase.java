@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.application.useCases.clientUseCases;
+package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
