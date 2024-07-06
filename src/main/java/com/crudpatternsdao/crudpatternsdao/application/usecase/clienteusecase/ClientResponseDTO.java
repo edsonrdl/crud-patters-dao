@@ -1,16 +1,25 @@
-package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
+package com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase;
 
-public class ClientRequestDTO {
+public class ClientResponseDTO {
     private String name;
+    private long codeClient;
     private String cpf;
     private int age;
-
+    
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public long getCodeClient() {
+        return codeClient;
+    }
+
+    public void setCodeClient(long codeClient) {
+        this.codeClient = codeClient;
     }
 
     public String getCpf() {

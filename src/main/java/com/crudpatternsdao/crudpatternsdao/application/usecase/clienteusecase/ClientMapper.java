@@ -1,8 +1,9 @@
-package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
+package com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase;
 
 
-import com.testeadmissao.testeadmissao.domain.entities.Client;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
+import com.crudpatternsdao.crudpatternsdao.domain.entities.Client;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+
 
 public class ClientMapper {
     public ClientResponseDTO toDTO(ClientEntity entity) {

@@ -8,10 +8,10 @@
 		<version>3.2.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.testeadmissao</groupId>
-	<artifactId>teste-admissao</artifactId>
+	<groupId>com.crudpatternsdao</groupId>
+	<artifactId>crud-patterns-dao</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>teste-admissao</name>
+	<name>crud-patterns-dao</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>

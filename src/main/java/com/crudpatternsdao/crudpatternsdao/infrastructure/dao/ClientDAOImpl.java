@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.infrastructure.dao;
+package com.crudpatternsdao.crudpatternsdao.infrastructure.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
+
+import com.crudpatternsdao.crudpatternsdao.domain.interfaces.useCases.IGenericDAO;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+
 
 @Primary
 @Repository

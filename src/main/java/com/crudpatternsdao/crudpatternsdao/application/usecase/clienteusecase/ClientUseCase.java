@@ -1,9 +1,11 @@
-package com.testeadmissao.testeadmissao.application.usecase.clienteusecase;
+package com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
+
+import com.crudpatternsdao.crudpatternsdao.domain.interfaces.useCases.IGenericDAO;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.dao.ClientDAOImpl;
+
 
 import jakarta.transaction.Transactional;
 

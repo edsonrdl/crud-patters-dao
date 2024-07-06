@@ -1,4 +1,4 @@
-package com.testeadmissao.testeadmissao.domain.interfaces.useCases;
+package com.crudpatternsdao.crudpatternsdao.domain.interfaces.useCases;
 
 import java.util.List;
 

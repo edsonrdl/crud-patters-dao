@@ -1,9 +1,11 @@
-package com.testeadmissao.testeadmissao.infrastructure.mapper;
+package com.crudpatternsdao.crudpatternsdao.infrastructure.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.testeadmissao.testeadmissao.domain.entities.Client;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
+
+import com.crudpatternsdao.crudpatternsdao.domain.entities.Client;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+
 
 public class ClientEntityMapper {
 

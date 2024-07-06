@@ -1,19 +1,18 @@
-package com.testeadmissao.testeadmissao.controllers;
+package com.crudpatternsdao.crudpatternsdao.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientMapper;
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientRequestDTO;
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientResponseDTO;
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.IClientUseCase;
-import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.ClientMapper;
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.ClientRequestDTO;
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.ClientResponseDTO;
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.IClientUseCase;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+
 
 
 @RestController

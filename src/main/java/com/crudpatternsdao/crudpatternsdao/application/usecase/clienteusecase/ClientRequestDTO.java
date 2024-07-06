@@ -1,13 +1,9 @@
-package com.testeadmissao.testeadmissao.domain.entities;
+package com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase;
 
-public class Client  {
-
+public class ClientRequestDTO {
     private String name;
-    
     private String cpf;
-    
     private int age;
-
 
     public String getName() {
         return name;

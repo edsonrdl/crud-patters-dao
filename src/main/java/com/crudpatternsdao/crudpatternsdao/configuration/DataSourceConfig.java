@@ -1,17 +1,15 @@
-package com.testeadmissao.testeadmissao.configuration;
+package com.crudpatternsdao.crudpatternsdao.configuration;
 
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.ClientMapper;
-import com.testeadmissao.testeadmissao.application.usecase.clienteusecase.IClientUseCase;
-import com.testeadmissao.testeadmissao.controllers.ClientController;
-import com.testeadmissao.testeadmissao.domain.interfaces.useCases.IGenericDAO;
-import com.testeadmissao.testeadmissao.infrastructure.dao.ClientDAOImpl; // Importe a classe ClientDAOImpl aqui
-import com.testeadmissao.testeadmissao.infrastructure.mapper.ClientEntityMapper;
-import com.testeadmissao.testeadmissao.infrastructure.model.ClientEntity;
-
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.ClientMapper;
+import com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase.IClientUseCase;
+import com.crudpatternsdao.crudpatternsdao.controllers.ClientController;
+import com.crudpatternsdao.crudpatternsdao.domain.interfaces.useCases.IGenericDAO;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.dao.ClientDAOImpl;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.mapper.ClientEntityMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
