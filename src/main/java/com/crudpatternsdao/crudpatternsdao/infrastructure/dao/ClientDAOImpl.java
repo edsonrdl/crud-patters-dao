@@ -7,17 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
-
-import com.crudpatternsdao.crudpatternsdao.domain.interfaces.useCases.IGenericDAO;
-import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientEntity;
+import com.crudpatternsdao.crudpatternsdao.infrastructure.Model.ClientModel;
 
 
 @Primary
 @Repository
-public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
+public class ClientDAOImpl implements IClientDAO {
+    
     private static final String URL = "jdbc:h2:~/test";
     private static final String USUARIO = "SA";
     private static final String SENHA = "senha";
@@ -27,50 +25,7 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
     }
 
     @Override
-    public ClientEntity findById(Long id) {
-        ClientEntity cliente = null;
-        String sql = "SELECT * FROM client WHERE code_client=?";
-        try (Connection connection = getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setLong(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    cliente = new ClientEntity();
-                    cliente.setCodeClient(rs.getLong("code_client"));
-                    cliente.setName(rs.getString("nome"));
-                    cliente.setCpf(rs.getString("cpf"));
-                    cliente.setAge(rs.getInt("idade"));
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return cliente;
-    }
-
-    @Override
-    public List<ClientEntity> findAll() {
-        List<ClientEntity> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM client";
-        try (Connection connection = getConnection();
-                PreparedStatement ps = connection.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                ClientEntity cliente = new ClientEntity(
-                        rs.getLong("code_client"),
-                        rs.getString("nome"),
-                        rs.getString("cpf"),
-                        rs.getInt("idade"));
-                clientes.add(cliente);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return clientes;
-    }
-
-    @Override
-    public ClientEntity save(ClientEntity entity) {
+    public ClientModel save(ClientModel entity) {
         String sql = "INSERT INTO client (nome, cpf, idade) VALUES (?, ?, ?)";
         try (Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -96,7 +51,53 @@ public class ClientDAOImpl implements IGenericDAO<ClientEntity, Long> {
     }
 
     @Override
-    public void update(ClientEntity entity) {
+    public ClientModel findById(Long id) {
+        ClientModel cliente = null;
+        String sql = "SELECT * FROM client WHERE code_client=?";
+        try (Connection connection = getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cliente = new ClientModel();
+                    cliente.setCodeClient(rs.getLong("code_client"));
+                    cliente.setName(rs.getString("nome"));
+                    cliente.setCpf(rs.getString("cpf"));
+                    cliente.setAge(rs.getInt("idade"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cliente;
+    }
+
+    @Override
+    public List<ClientModel> findAll() {
+        
+        List<ClientModel> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM client";
+        try (Connection connection = getConnection();
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                ClientModel cliente = new ClientModel(
+                        rs.getLong("code_client"),
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getInt("idade"));
+                clientes.add(cliente);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clientes;
+    }
+
+   
+
+    @Override
+    public void update(ClientModel entity) {
         String sql = "UPDATE client SET nome=?, cpf=?, idade=? WHERE code_client=?";
         try (Connection connection = getConnection();
                 PreparedStatement ps = connection.prepareStatement(sql)) {

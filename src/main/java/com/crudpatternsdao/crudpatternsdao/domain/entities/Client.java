@@ -5,6 +5,8 @@ public class Client  {
     private String name;
     
     private String cpf;
+
+    private long codeClient;
     
     private int age;
 
@@ -32,4 +34,15 @@ public class Client  {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public Long  getCodeClient() {
+
+     return codeClient ;
+
+     }
+
+     public void setCodeClient(long codeClient) {
+        this.codeClient = codeClient;
+    }
+
 }
