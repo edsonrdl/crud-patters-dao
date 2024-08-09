@@ -1,8 +1,11 @@
 package com.crudpatternsdao.crudpatternsdao.application.usecase.clienteusecase;
 
 public class ClientRequestDTO {
+
     private String name;
+
     private String cpf;
+
     private int age;
 
     public String getName() {
